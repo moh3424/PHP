@@ -457,11 +457,11 @@ function appliqueTva($nombre){
 
 // Votre code :
 
-function appliqueTva2($taux){
-    return 5*$taux;
+function appliqueTva2($nombre,$taux){
+    return $nombre*$taux;
 }
 
-echo  appliqueTva2('5');
+echo  appliqueTva2(2,3);
 
 
 
