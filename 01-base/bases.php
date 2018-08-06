@@ -1,5 +1,21 @@
 <style>
     h2{font-size: 15px; color: orange;}
+    .vert{
+        background: green;
+    }
+    .jaune{
+        background: yellow;
+    }
+    .bleu{
+        background: blue;
+    }
+    .rouge{
+        background: red;
+    }
+    .violet{
+        background: olive;
+    }
+   
 </style>
 
 <?php
@@ -26,7 +42,7 @@ echo'<h2> Affichage dans le navigateur</h2>';
 
 print 'Nous sommes lundi <br>'; //  autre instruction  d'affichage
 
-//Deux autres intruction d'affichage existe (nous les berrons plus loin):
+//Deux autres intruction d'affichage existe (nous les verrons plus loin):
 print_r('message');
 echo '<br>';
 var_dump('message');
@@ -241,8 +257,11 @@ if ($varA === $varB){
 
 //---------
 // isset() et empty():
+echo '<h3 class ="violet"> isset() et empty():<h3>';
 // Définitions :
+echo '<h4>Définitions</h4>';
 // empty(): teste si c'est vide (c'est-à-dire 0, '', NULL, false ou non défini)
+echo '<p>empty(): teste si c\'est vide (c\'est-à-dire 0, \'\', NULL, false ou non défini)</p>';
 
 $var1 = 0;
 $var2 = '';
@@ -259,6 +278,190 @@ if (empty($var2)){
 
 // Contexte d'utilisateur : les formulaires pour empty, l'existence de variable ou d'array avec isset avant de les utiliser.
 
+//---------
+// L'opérateur NOT qui s'écrit "!":
+echo '<h2 class ="violet"> L\'opérateur NOT qui s\'écrit "!":<h2>'; 
+$var3 = 'Je ne suis pas vide';
+
+if (!empty($var3)) echo '$var3 n\est pas vide <br>'; //! pour NOT est une négation.Ici signifie si $var3 n'est pas vide
+
+//phpinfo();  // fonction prédéfinie qui affiche des informatios sur le contexte d'exécution du script
+echo '<h2 class ="violet"> phpinfo() :<h3>';           
+echo '<p> fonction prédéfinie qui affiche des informatios sur le contexte d\'exécution du script</p>';
+//------------------------------------------------
+echo'<h2> Condition switch </h2>';
+//------------------------------------------------
+
+// la condition switch est une autre syntaxe pour écrire un if....elseif.....elseif......else.
+
+$couleur ="jaune";
+
+switch ($couleur) {
+    case 'bleu' : // Si $couleur contien la valeur 'bleu', nous exécutons l'instriction après le ":" qui suit:
+        echo 'Vous aimez le bleu  <br>';
+    break; //break est obligatoire pour quitter la condition switch une fois le case exécuté
+    case 'vert' :
+         echo 'Vous aimez le vert  <br>';
+    break;
+    case 'rouge' :
+         echo 'Vous aimez le rouge  <br>';
+    break;
+    case 'jaune' :
+         echo '<h3 class="jaune">Vous aimez le jaune </h3> <br>';
+    break;
+    case 'blanc' :
+         echo 'Vous aimez le blanc  <br>';
+    break;
+    
+    default :// correspond à else, le cas par défaut dans lequel on entre si aucune des valeurs précédentes n'est juste
+        echo 'Vous n\'aimez ni le bleu, ni le vert, ni le rouge, ni le jaune, ni le blanc  <br>';
+    break;
+
+}
+
+//Exércice : réécrivez le switch précédent  en conditions if .... pour obtenir exactement le même resultat
+
+$couleur = 'bleu';
+
+if ($couleur == 'jaune'){
+    echo 'Vous aimez le jaune';
+}elseif ($couleur == 'bleu'){
+    echo '<h5 class="bleu">Vous aimez le bleu</h5> <br>';
+}elseif ($couleur == 'vert'){
+    echo 'Vous aimez le vert  <br>';
+}elseif ($couleur == 'blanc'){
+    echo 'Vous aimez le blanc  <br>';
+}else {
+    echo 'Vous n\'aimez ni le bleu, ni le vert, ni le rouge, ni le jaune, ni le blanc  <br>';
+}
+
+$couleur = 'vert';
+
+if ($couleur == 'jaune'){
+    echo 'Vous aimez le jaune';
+}elseif ($couleur == 'bleu'){
+    echo '<h5 class="bleu">Vous aimez le bleu</h5> <br>';
+}elseif ($couleur == 'vert'){
+    echo '<h5 class="vert">Vous aimez le vert</h5>  <br>';
+}elseif ($couleur == 'blanc'){
+    echo 'Vous aimez le blanc  <br>';
+}else {
+    echo 'Vous n\'aimez ni le bleu, ni le vert, ni le rouge, ni le jaune, ni le blanc  <br>';
+}
+
+$couleur = 'rouge';
+
+if ($couleur == 'jaune'){
+    echo 'Vous aimez le jaune';
+}elseif ($couleur == 'bleu'){
+    echo '<h5 class="bleu">Vous aimez le bleu</h5> <br>';
+}elseif ($couleur == 'vert'){
+    echo '<h5 class="vert">Vous aimez le vert</h5>  <br>';
+}elseif ($couleur == 'rouge'){
+    echo '<h5 class="rouge">Vous aimez le rouge</h5>  <br>';
+}else {
+    echo 'Vous n\'aimez ni le bleu, ni le vert, ni le rouge, ni le jaune, ni le blanc  <br>';
+}
+
+//------------------------------------------------
+echo'<h3>Les Fonctions Prédéfinies </h3>';
+//------------------------------------------------
+// Une fonction prédéfinie permet de réaliser un traitement spécifique prédéterminé dans le langage PHP
+
+//-----
+// strpos() :
+echo '<h3 class ="violet"> strpos() :<h3>';
+$email1 = 'prenom@site.fr';
+echo strpos($email1, '@');// indique la position 6 du caractère '@' dans la chaine $email (compte à partire de 0)
+
+echo '<br>';
+
+$email2 = 'Bonjour';
+echo strpos($email2,'@' );// cette ligne n'affiche rien, pourtant la fonction strpos retourne bien quelque chose. Pour l'analyser nous faisons un var_dump ci-dessous:
+
+
+var_dump(strpos($email2,'@'));// on voit  grâce au var_dump que la fonction retourne false quand elle ne trouve pas l'@. var_dump est une instruction d'affichage améliorée que l'on utilise uniquement en phase de dévlopement (on le retire en production)
+
+echo '<br>';
+
+//--------
+// strlen() :
+echo '<h3 class ="violet"> strlen()<h3>';
+$phrase = 'mettez une phrase ici';
+echo strlen($phrase) . '<br>'; // affiche la longueur de la chaine de caractères, ici 21. Notez que strlen compte le nombre d'octets, et que les caractères accentués comptent pour 2. Si vous voulez comptez précisément le nombre de caractères, on utilise: mb_strlen().
+
+//-----
+//strtolower, strtoupper(), trim()
+
+echo '<h3 class ="violet"> strtolower, strtoupper(), trim()<h3>';
+
+$message = '     Hello World!';
+
+echo strtolower($message) . '<br>';// affiche tout en miniscules
+
+echo strtoupper($message) . '<br>';// affiche tout en majuscules
+
+echo strlen($message) . '<br>';// affiche la longueur avec les espaces
+
+echo strlen(trim($message)) . '<br>';// trim() supprime les espaces au début et à la fin de la chaine de caractères. Puis strlen affiche la longueur de cette chaine sans les espaces .
+
+//-----------
+// die () ou exit();
+echo '<h3 class ="violet"> die () ou exit():<h3>';
+//exit('ici un message'); // affiche un message (optionnel) et arrête le script
+//die('un autre message); // die() est un alias de  exit : il fait la même chose.
+
+//---------------
+//Le manuel PHP
+echo '<h3 class ="violet"> Le manuel PHP:<h3>';
+/*
+Pour chercher un fonction (ou une chose) de PHP : faire Google "OHP nom de la fonction.
+exemple : "PHP trim"
+le site de référence : php.net/manual/fr/
+A retenir : l'encadré blanc qui définit la fonction : en bleu les mots clés et les paramètres, en vert leur type, entre crochets les paramètres optionnels.
+*/
+
+//-------------------------------------------
+echo'<h3>Les Fonctions Utilisateur </h3>';
+//-------------------------------------------
+//Des fonctions sont des morceaux de codes encapsulés dans des accolades et portant un nom, qu'o, appelle au besoin pour exécuter une action précise.
+
+// Les fonctions qui ne sont pas prédéfinies mais déclarées par le développeur sont appelées fonction utilisateur.
+
+// Fonction sans paramètre :
+function tiret(){ //on déclare une fonction avec le mot clé function, suivi du nom puis d'une paire de (), et enfin d'une paire d'accolades
+    echo '<hr>';
+}
+tiret();// pour exécuter une fonction, on l'appelle par son nom suivi d'une paire de ()
+
+//------
+// fonction avec paramètre et return :
+echo '<h3 class ="violet">fonction avec paramètre et return :<h3>';
+
+function affichageBonjour($nom) {
+    return "Bonjour $nom comment vas-tu ?";
+    // Ou bien 'bonjour' . $nom . ', comment vas-tu ?';
+    echo 'TEST'; // après un return, les instructions de la fonction ne sont pas lues
+}
+
+echo affichageBonjour('Luc');// Si la fonction possède un paramètre, il faut obligatoirement lui envoyer une valeur lors de l'appel de la fonction. La fonction nous returne le string "Bonjour Luc, comment vas-tu ? gâce au mot clé return qui s'y trouve. Il faut donc faire un echo pour afficher le résultat.
+
+//Exercice d'pplication
+echo '<h3 class ="violet">Exercice d\'pplication :<h3>';
+// écrivez une fonction appelée appliqueTva2 qui multiplie un nombre donnée par un taux donné.
+echo '<p>Exercice d\'pplication :<p>';
+
+function appliqueTva($nombre){
+    return $nombre*1.2;
+}
+
+// Votre code :
+
+function appliqueTva2($taux){
+    return 5*$taux;
+}
+
+echo  appliqueTva2('2');
 
 
 
