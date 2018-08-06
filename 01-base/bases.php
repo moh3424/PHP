@@ -452,7 +452,7 @@ echo '<h3 class ="violet">Exercice d\'pplication :<h3>';
 echo '<p>Exercice d\'pplication :<p>';
 
 function appliqueTva($nombre){
-    return $nombre*1.2;
+    return $nombre*$taux;
 }
 
 // Votre code :
@@ -461,7 +461,7 @@ function appliqueTva2($taux){
     return 5*$taux;
 }
 
-echo  appliqueTva2('2');
+echo  appliqueTva2('5');
 
 
 
