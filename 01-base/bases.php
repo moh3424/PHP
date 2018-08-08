@@ -987,3 +987,6 @@ tiret();
 echo'<h2>Les inclusions des fichiers :</h2>';
 //-------------------------------------------
 // On fait un fichier au meme niveau 01-base et on le nomme exemple.inc.php
+
+echo 'première inclusion : ';
+include 'exemple.inc.php';
