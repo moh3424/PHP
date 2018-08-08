@@ -204,7 +204,7 @@ if ($a > $b){ // si $a est supérieur à $b, la condition est évaluée à true,
     echo "$a est inférieur à $b <br>";
 }
 
-//----
+//------
 // L'opérateur AND qui s'écrit &&:
 
 if ($a > $b && $b > $c){ // si $a est supérieur à $b ET au même temps $b est supérieur à $c, alors on entre dans les accolades:
@@ -990,3 +990,12 @@ echo'<h2>Les inclusions des fichiers :</h2>';
 
 echo 'première inclusion : ';
 include 'exemple.inc.php';
+
+echo 'Deuxième inclusion:';
+include_once 'exemple.inc.php'; // le once vérifie si le fichier a déja été inclus. Si c'est le cas, il ne le ré-inclut pas.
+
+echo 'Troisième inclusion :';
+require 'exemple.inc.php';// le fichier est "requis" : en cas d'erreur sur le nom ou le chemin du fichier, require génére une erreur de type "fatal error" et arrête l'exécustion du script
+
+echo 'Qutrième inclusion:';
+require_once 'exemple.inc.php';// le once vérifie si le fichier a déja été inclus. Si c'est le cas, il ne le ré-inclut pas

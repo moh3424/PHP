@@ -1,1 +1,1 @@
-<p>Ceci est le fichier d'inclusion.</p>
+<p class="jaune">Ceci est le fichier d'inclusion.</p>
