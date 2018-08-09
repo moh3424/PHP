@@ -990,6 +990,7 @@ echo 'première inclusion : ';
 include 'exemple.inc.php';
 
 echo 'Deuxième inclusion:';
+
 include_once 'exemple.inc.php'; // le once vérifie si le fichier a déja été inclus. Si c'est le cas, il ne le ré-inclut pas.
 
 echo 'Troisième inclusion :';
@@ -997,3 +998,29 @@ require 'exemple.inc.php';// le fichier est "requis" : en cas d'erreur sur le no
 
 echo 'Qutrième inclusion:';
 require_once 'exemple.inc.php';// le once vérifie si le fichier a déja été inclus. Si c'est le cas, il ne le ré-inclut pas
+
+echo '<br>';
+echo '<br>';
+echo '<br>';
+tiret();
+//-------------------------------------------
+echo'<h2>Introduction aux objets
+ :</h2>';
+//-------------------------------------------
+
+// Un objet est un autre type de données. Il permet de regrouper des informations : on peut y déclarer des variables appelées PROPRIETES ou ATTRIBUTS, et des fonctions appelées METHODES// Pour créer des objets, nous avons besoin d'un "plan de construction" : c'est le rôle de la classe (note: rien à voir avec le CSS....). Nous créons donc une classe pour créer nos meubles :
+
+class Meuble {// on met une majuscule au nom de la class
+   public $marque = 'ikea'; // ici on déclare une propriété "marque" (public pour dire qu'elle est accessible partout)
+   public function origine(){
+       return 'origine suédoise';
+   }
+
+}// une class est un plan d'objets qui contient des propriétés et des méthodes. Ainsi en créant un objet à partir de cette classe, cet objet héritera de ces  propriétés et méthodes.
+
+// Enfin, on crée un objet table :
+$table = new meuble();// new est un mot clé qui permet d'instancier la classe Meuble et d'en faire un objet. ON dit que $table est une instance de la class Meuble
+debug ($table);// nous pouvons observer le type de $table (object), le nom de la classe dont il provient (Meuble), et sa seule propriété(marque).
+
+echo 'La marque de notre table est : ' . $table->marque .'<br><br>';// pour accéder à la propriété d'un objet, on écrit l'objet suivi du nom de la propriété. Affiche "ikea"
+echo $table->origine() . '<br><br>'; //idem pour appeler une méthode d'un objet à laquelle on ajoute une paire de ().

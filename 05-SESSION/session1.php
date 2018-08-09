@@ -35,3 +35,11 @@ unset($_SESSION['mdp']);// unset() permet de vider une partie de la SESSION, ici
 echo '<br> 2- La session après suppression du mdp : <br>';
 
 var_dump($_SESSION);
+
+// Supprimer entièrement une session :
+//session_destroy();
+
+echo '<br> 3- La session après suppression  : <br>';
+var_dump($_SESSION);// nous voyons encore le contenu de la session ici. En effet, il faut savoir que session_destroy()est d'abor lu par l'interpréteur, puis exécuter réellement qu'à la toute fin du script :pour le voir, vérifier le dossier xampp/tmp où la session n'existe plus.
+
+//Les SESSIONS ont l'avantage d'être disponibles partout sur le site, et donc dans tous les scripts (voir session2.php).
