@@ -10,6 +10,26 @@
 //         3- Si on a cliqué sur le lien "modifier mon profil", c\'est-àdir que vous avez reçu cette info en GET, vous affichez le message "Vous avez demandé la modification de votre profil",
 //         et si c'est la suppression qui est demandée, vous affichez le message "Vous avez demandé la suppression de votre profil"
 //   </p>';
+var_dump ($_GET);
+// if (isset($_GET['nom']) && isset($_GET['prenom'])){
+//     echo '<p> nom :' . $_GET['nom'] . '</p>';
+//     echo '<p> prenom :' . $_GET['prenom'] . '</p>';
+   
+// } else {
+//     echo '<p> Aucun profil sélectionné....</p>';
+// }
+$message = '';// variable pour contenir les messages pour l'internaute
+if  (isset($_GET['action']) && $_GET['action'] == 'modifier' ){// Il fau vérifier d'abord l'existance de l'indice "action" dans $_GET avant d'en vérifier la valeur
+    
+    $message = '<p>Vous avez demander la suppression de votre profil</p>';
+   
+} 
+
+if (isset($_GET['action']) && $_GET['action'] == 'supprimer' ){
+    
+    $message = '<p>Vous avez demander la modification de votre profil</p>';
+   
+} 
 
 ?>
 
@@ -22,34 +42,13 @@
     <title>Profil</title>
 </head>
 <body>
-<a href="exercice.php?nom=yessad&prenom=mohamed">Profil</a>
-<a href="exercice.php?action=modif">Modifier mon profil</a>
-<a href="exercice.php?action=supp">Supprimer mon profil</a>
+<h1>PROFIL</h1>
+<?php echo $message;?>
+<P>Non : Yessad</P>
+<P>Prénom : Mohamed</P>
+<a href="?nom=yessad&prenom=mohamed">Profil</a>
+<a href="?action=modifier">Modifier mon profil</a>
+<a href="?action=supprimer">Supprimer mon profil</a>
 </body>
 </html>
 
-<?php
-if (isset($_GET['nom']) && isset($_GET['prenom'])){
-    echo '<p> nom :' . $_GET['nom'] . '</p>';
-    echo '<p> prenom :' . $_GET['prenom'] . '</p>';
-   
-} else {
-    echo '<p> Aucun profil sélectionné....</p>';
-}
-
-if ($_GET['supp']){
-    
-    echo '<p>Vous avez demander la suppression de votre profil</p>';
-   
-} else {
-    echo '<p> Aucun profil sélectionné pour le suprimer....</p>';
-}
-
-if ($_GET['modif']){
-    
-    echo '<p>Vous avez demander la modification de votre profil</p>';
-   
-} else {
-    echo '<p> Aucun profil sélectionné pour le modifier....</p>';
-}
-?>
