@@ -820,7 +820,7 @@ $couleur = array(
 );
 
 debug ($couleur);
-// Pour accéder à un élément du tableau aassociatif :
+// Pour accéder à un élément du tableau associatif :
 
 echo 'la seconde couleur de notre tableau est le  ' . $couleur['b'] . '</br>';
 echo "la seconde couleur de notre tableau est le    $couleur[b]  </br>";// affiche aussi "bleu". Un array écrit dans des guillemets ou des quotes perd les quotes autour de son indice
@@ -849,9 +849,9 @@ tiret();
 echo'<h2>La boucle foreach pour les  array :</h2>';
 //-------------------------------------------
 // foreach est un moyen simple de passer en revue un tableau. Elle fonctionne uniquement sur les tableau et les objets.
-echo '<p>foreach est un moyen simple de passer en revue un tableau. Elle fonctionne uniquement sur les tableau et les objets.<p>';
+echo '<p>foreach est un moyen simple de passer en revue un tableau. Elle fonctionne uniquement sur les tableaux et les objets.<p>';
 
-foreach($tab as $valeur){// le mot clé as fait partie de la structur du foreach et est obligatoir. la variable $valeur (que l'on nomme comme on veut) vient parcourir les valeurs du tableau $tab. Quant il y a une seul variable après "as", elle parcourt systématiquement les VALEURS 
+foreach($tab as $valeur){// le mot clé as fait partie de la structure du foreach et est obligatoir. la variable $valeur (que l'on nomme comme on veut) vient parcourir les valeurs du tableau $tab. Quant il y a une seul variable après "as", elle parcourt systématiquement les VALEURS 
     echo $valeur . '<br>'; // on affiche successivement à chaque tour de boucle les éléments du tableau
 }
 
@@ -874,7 +874,6 @@ $eleve = array(
         'nom' => 'Yessad',
         'email' => 'mohamed.yessad@lepoles.com',
         'telephone' => '06.08.09.04.99'
-
 );
 
 debug($eleve);
@@ -922,13 +921,12 @@ $tab_multi = array(
 // il est biensûr possible de choisir le nom des indices de notre array.
 echo '<br>';
 echo '<br>';
-echo '<p class="color"> var_dump($tab_multi) ce qui nous donne un affichage :<p>';
-var_dump($tab_multi);
+echo '<p class="color"> var_dump($tab_multi) ce qui nous donne un affichage, il sert pour le developpeur :<p>';
+var_dump($tab_multi);// le mettre en commentaire en prod, il sert pour le developpeur
 echo '<br>';
 echo '<br>';
-echo '<br>';
-echo '<p class="color"> debug($tab_multi) ce qui nous donne un affichage:<p>';
-debug($tab_multi);
+echo '<p class="color"> debug($tab_multi) ce qui nous donne un affichage , il sert pour le developpeur :<p>';
+debug($tab_multi);// le mettre en commentaire en prod, il sert pour le developpeur
 
 // Afficher la valeur 'Julien' :
 echo '<p class="color"> Afficher la valeur Julien :<p>';
@@ -952,7 +950,7 @@ echo '<hr>';
 echo '<br>';
 echo '<br>';
 echo '<p class="color">Exercice tableau multidimentionnels :<p>';
-echo '<p>Afficher les 3 prenoms avec une boucle foreach :</p>';
+echo '<p>Afficher les 3 prénoms avec une boucle foreach :</p>';
 foreach($tab_multi as $indice => $valeur){
         echo $tab_multi[$indice]['prenom'] . '<br>';  
 }
