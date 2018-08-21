@@ -42,7 +42,7 @@
 
 <?php
 //---------------------
-echo'<h2> les bases</h2>';
+echo'<div><h2> les bases</h2></div>';
 //--------------------
 ?>
 
@@ -57,12 +57,12 @@ echo'<h2> les bases</h2>';
 // vous n'êtes pas obligé de fermer un passage en PHP en fin de  script.
 
 //----------------------------------------------
-echo'<h2> Affichage dans le navigateur</h2>';
+echo'<div><h2> Affichage dans le navigateur</h2></div>';
 //---------------------------------------------
 // echo est une instriction qui permet d'afficher  dans le navigateur. Notez que nous pouvons y mettre du HTML.
 // Toutes les instrictions se terminenent  par un ";".
 
-print 'Nous sommes lundi <br>'; //  autre instruction  d'affichage
+print '<div>Nous sommes lundi <div>'; //  autre instruction  d'affichage
 
 //Deux autres intruction d'affichage existe (nous les verrons plus loin):
 print_r('message');
