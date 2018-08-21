@@ -264,7 +264,7 @@ $resultat =$pdo->prepare("SELECT * FROM employes WHERE nom= :nom"); // :nom est 
 echo '<h4> 2- Lier les marqueur au valeurs :</h4>';
 echo '<p> avec la methode bindParam() et on utilisant le marqueur :nom .</p>';
 
-$resultat->bindParam(':nom' , $nom);
+$resultat->bindParam(':nom' , $nom);// bindParam() reçoit exclusivement une variable vers laquelle pointe le marqueur. On ne peut pas y mettre une valeur directement, sinon il faut utiliser bindValue() à la place de bindParam().
 
 // 3- Executer la requête :
 echo '<h4> 3- Executer la requête :</h4>';
@@ -275,5 +275,54 @@ $resultat->execute();
 // 4- Affichage :
 echo '<h4> 4- Affichage :</h4>';
 
-$donnes = $resultat->fetch(PDO::FETCH_ASSOC);
-debug($donnes);
+$donnees = $resultat->fetch(PDO::FETCH_ASSOC);
+debug($donnees);
+
+/*
+prepare() permet de péparer la requête mais ne l'exécute pas.
+execute() permet d'exécuter une requête préparée.
+
+     Valeurs de retour :
+     prepare() renvoie toujours un objet PDOStatement.
+     execute():
+        En cas de succès : TRUE
+        En cas d'échec  : FALSE
+
+    Les requêtes préparées sont préconisées si vous exécutez plusieurs fois la même requête et ainsi éviter de refaire le cycle complet analyse/interprétation réalisé par le SGBD (on ne refait que le execute).
+
+    Les requêtes préparées sont souvent utilisées our assainir (netoyer) les données (ce que nous verrons dans un chapitre ultérieur).
+
+
+
+*/
+echo '<p>prepare() permet de péparer la requête mais ne l\'exécute pas.</p>';
+echo '<p>execute() permet d\'exécuter une requête préparée.</p>';
+echo '<h4>Valeurs de retour :</h4>';
+echo '<p>Les requêtes préparées sont préconisées si vous exécutez plusieurs fois la même requête et ainsi éviter de refaire le cycle complet analyse/interprétation réalisé par le SGBD (on ne refait que le execute).
+</p>';
+echo '<p> Les requêtes préparées sont souvent utilisées our assainir (netoyer) les données (ce que nous verrons dans un chapitre ultérieur).</p>';
+
+
+//-------------------
+// 09- Requête préparée : point complémentaires :
+//-------------------
+echo '<h3>  09- Requête préparée : point complémentaires : </h3>';
+
+echo '<h4> Le marqueur "?": </h4>';
+
+$resultat = $pdo->prepare("SELECT * FROM employes WHERE nom = ? AND prenom = ?"); // On prépare dans un premier temps, la requête avec  des marqueurs sous form de "?"
+
+$resultat->execute(array('durand', 'damien'));// durand va remplacer le premier intérogation "?" et damien va remplacer le second "?"
+
+$donnees = $resultat->fetch(PDO::FETCH_ASSOC); // pas de while car il n'y a qu'un seul résultat
+
+echo $donnees['prenom'] . ' ' . $donnees['nom'] . ' ' . $donnees['service'] . '.';
+
+//--------------
+echo '<h4>execute() sans bindParam() :</h4>';
+$resultat =  $pdo->prepare('SELECT * FROM employes WHERE nom = :nom AND prenom = :prenom');
+
+$resultat->execute(array(':nom' => 'chevel', ':prenom' => 'daniel')); // On peut associer directement dans les () de execute() les marqueurs de la requête SQL à leur valeur. Notez qu'il est possible de ne pas mettre les ":" avant le nom des marqueurs dans cet array.
+
+$donnees = $resultat->fetch(PDO::FETCH_ASSOC);
+echo $donnees['prenom'] . ' ' . $donnees['nom'] . ' ' . $donnees['service'] . '.';
