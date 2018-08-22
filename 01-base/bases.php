@@ -490,7 +490,7 @@ function appliqueTva2($nombre,$taux = 1.5){// on peut initialiser un paramètre 
 }
 
 echo  appliqueTva2(6,3) . '<br>';
-echo  appliqueTva2(6) . '<br>'; //$taux ayant une valeur par défaut dans les () de la fonction ci-dssus, on n'est pas obligé de lui donnér un argument pour ce $taux. Affiche 18
+echo  appliqueTva2(6) . '<br>'; //$taux ayant une valeur par défaut dans les () de la fonction ci-dssus, on n'est pas obligé de lui donnér un argument pour ce $taux. Affiche 9
 tiret();
 //--------------
 //Exercice N°1 : d\'pplication :
