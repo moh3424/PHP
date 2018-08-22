@@ -10,6 +10,7 @@ $message =''; // pour afficher les messages à l'internautes
     echo '<h3> 1- Création du formulaire :</h3>' ;
 
     var_dump($_POST);
+    var_dump(DateTime::createFromFormat('d-m-Y','32-01-2015'));// pour tester la validation de la date en affichant sur le navigateur pour le developpeur
 
     //1- Connexion a la BDD :
     echo '<h4> 1- Connexion a la BDD :</h4>' ;
@@ -39,11 +40,70 @@ $message =''; // pour afficher les messages à l'internautes
 
             // Validation de la date :
 
-            function validateDate ($_date, $format = 'd-m-Y'){// $format = 'd-m-Y' permet de donner une valeur par défaut au paramètre $format si on ne lui pas d'argument lors de l'appel de la fonction
-                return true;
+            function validateDate ($date, $format = 'd-m-Y'){// $format = 'd-m-Y' permet de donner une valeur par défaut au paramètre $format si on ne lui pas d'argument lors de l'appel de la fonction
+               $d = DateTime::createFromFormat($format, $date); // Crée un objet date si la date est valide et qu'elle corrspond au format indiqué dans $format. Dans le cas contraire, retourne false (c'est- à - dir si la date n'est pas valide ou qu'elle ne correspond pas au format indiqué)
+
+               if ($d && $d->format($format)== $date){ // si $d n'est pas false (voir ci-dessus) et que l'objet dat $d est bien égale à la date $date, c'est qu'il n'y a pas eu d'extrapolation sur la date : exemple de 32/01/2015 qui devient 01/02/2015. Dans ce cas la date est validé . On retourne true.
+
+                   return true;
+               }
+               else {
+
+                   return false;
+               }
+               
             }
 
-            if (!isset($_POST['date_embauche']) || !validateDate($_POST['date_embauche'], 'Y-m-d')) $message .= '<div>La date n\'est pas valide .</div>';
+            if (!isset($_POST['date_embauche']) || !validateDate($_POST['date_embauche'], 'Y-m-d')) $message .= '<div>La date n\'est pas valide .</div>'; // On entre dans la condition si l'indice "date_embauche" n'existe pas OU que la fonction validateDate() ne retourne false (attention à la présence du "!")
+
+            // Insertion en BDD si il n'y a pas de message d'erreur :
+            echo '<h3>  Insertion en BDD si il n\'y a pas de message d\'erreur :</h3>' ;
+
+            if (empty($message)){// si le $message est vide c'est qu'il n'y a pas d'erreur
+
+                // On échappe toutes les valeurs de $_POST :
+                echo '<h5>  On échappe toutes les valeurs de $_POST :</h5>' ;
+                foreach($_POST as $indice => $valeur){
+                    $_POST[$indice] = htmlspecialchars($valeur, ENT_QUOTES);
+                }
+
+
+                // On fait une requête préparée :
+                echo '<h5>   On fait une requête préparée :</h5>' ;
+
+                $result = $pdo->prepare("INSERT INTO employes (prenom, nom, sexe, service, date_embauche, salaire) VALUES (:prenom, :nom, :sexe, :service, :date_embauche, :salaire)");
+
+                // $result->bindParam(':prenom', $_POST['prenom']);
+                // $result->bindParam(':nom', $_POST['nom']);
+
+                // $result->bindParam(':sexe', $_POST['sexe']);
+                // $result->bindParam(':service', $_POST['service']);
+             
+                
+                // $result->bindParam(':date_embauche', $_POST['date_embauche']);
+                // $result->bindParam(':salaire', $_POST['salaire']);
+
+                //  Version avec une boucle foreach :
+                    echo '<h5> Version avec une boucle foreach :</h5>' ;
+                    foreach($_POST as $indice=> &$valeur){ // pour que ça marche on a besoin d'une variable par référence
+                        $result->bindParam($indice, $valeur);
+                    }
+
+                $req =$result->execute();// la methode execute() renvoie un booléen selon que la requête a marché (true) ou  pas (false)
+
+                // Afficher un message de réussite ou d'écheque :
+
+                if ($req){
+                    $message .= '<div>L\'employé a bien été ajouté .</div>';
+                }else {
+                    $message .= '<div>Une erreur est survenue lors de l\'enregistrement. .</div>';
+                }// fin de if ($req)
+
+
+
+            }// fin de if(empty($message)) 
+
+
 
 
             }// fin du if(!empty($_POST))

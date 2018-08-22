@@ -108,8 +108,36 @@ echo '<br><br>';
 
 //* - Afficher le nombre de commerciaux
 echo '<h4>Le nombre de commerciaux</h4>';
-echo 'Nombre d\'employés : ' . $resultat->rowCount() . '<br>';
-echo date('y/m/d') .' '.date("l");
+echo 'Nombre d\'employés : ' . $resultat->rowCount() . '<br><br><br>';
+echo date('y/m/d') .' '.date("l").'<br><br>';
 
-setlocale(LC_TIME, 'fr_FR');
-echo strftime("%A %d %B %Y");
+
+$jour = array (
+	' ',
+	'lundi',
+	'mardi',
+	'mercredi',
+	'jeudi',
+	'vendredi',
+	'samedi',
+	'dimanche'
+
+);
+$mois = array(
+	' ',
+	'janvier',
+	'fevrier',
+	'mars',
+	'avril',
+	'mai',
+	'juin',
+	'juillet',
+	'aout',
+	'septembre',
+	'octobre',
+	'novembre',
+	'decembre'
+);
+setlocale(LC_TIME, 'fr_FR').'<br><br>';
+echo strftime("%A %d %M %Y") .'<br><br>';
+echo 'le ' . strftime($jour[3]) .' '. date('d'). ' '  . ' ' .strftime($mois[8]) . ' ' . date('Y').'ligne 143<br><br>' ;
