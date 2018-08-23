@@ -3,7 +3,7 @@
 require_once 'inc/init.inc.php';
 $inscription = false; // pour s'avoir si l'internaute vient de s'inscrire (on mettra la variable à true) et ne plus afficher le formulaire d'inscription
 
-var_dump($_POST);
+// var_dump($_POST);
 
 // Traitement du formulaire 
 if (!empty($_POST)){ // Si le formulaire est soumis
@@ -35,7 +35,24 @@ if (!empty($_POST)){ // Si le formulaire est soumis
         // Vérification du pseudo :
             $membre = executeRequete("SELECT * FROM membre WHERE pseudo = :pseudo", array(':pseudo' => $_POST['pseudo'])); // on sélectionne en base les éventuels membres dont le pseudo correspond au pseudo donné par l'internaute lors de l'inscription
 
-            // code du if
+        if ($membre->rowCount() >0){//si la requête retourn 1 ou plusieurs resultats c'est que le pseudo existe en BDD
+            $contenu .= '<div class="bg-danger">Le Pseudo est indisponible. Veuillez en choisir un autre.</div>';
+        } else {
+            // sinon le pseudo étant disponible, on enregitr le membre en BDD :
+            executeRequete("INSERT INTO membre (pseudo, mdp, nom, prenom, email, civilite, ville, code_postal, adresse, statut) VALUES(:pseudo, :mdp, :nom, :prenom, :email, :civilite, :ville, :code_postal, :adresse, 0)", array(':pseudo' => $_POST['pseudo'],
+                                                                          ':mdp' => $_POST['mdp'],
+                                                                          ':nom' => $_POST['nom'],
+                                                                          ':prenom' => $_POST['prenom'],
+                                                                          ':email' => $_POST['email'],
+                                                                          ':civilite' => $_POST['civilite'],
+                                                                          ':ville' => $_POST['ville'],
+                                                                          ':code_postal' => $_POST['code_postal'],
+                                                                          ':adresse' => $_POST['adresse'],
+                                                                            
+                                                                            ));
+          $contenu .= '<div class="bg-success">Vous êtes inscrit à notre site . <a href="connexion.php">Cliquez ici pour vous connecter.</a></div>';    
+         $inscription = true; // pour ne plus afficher le formulaire sur cette page                                                              
+        }// fin du else
 
 
     }/* (empty($contenu)) */
@@ -49,11 +66,14 @@ if (!empty($_POST)){ // Si le formulaire est soumis
 
 //--------------------------------AFFICHAGE--------------------------------------
 require_once 'inc/haut.inc.php'; // doctype, header, nav
-echo $contenu;  // pour afficher les messages à l'internaute
- 
 ?>
     <h1 class = "mt-4">Inscription</h1>
+    
 <?php
+echo $contenu;  // pour afficher les messages à l'internaute
+ 
+
+  
 if (!$inscription) : // (!$inscription) équivaut à ($inscription == false), c'est à dire que nous entrons dans la condition si $inscription vaut false. Syntaxe en if (codition) : .... endif;
     
 ?>
