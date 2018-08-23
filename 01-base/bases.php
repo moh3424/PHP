@@ -69,7 +69,7 @@ print_r('message');
 echo '<br>';
 var_dump('message');
 
-//pour faire un commentair sur une seul ligne
+//pour faire un commentaire sur une seule ligne
 
 /*
 pour faire un commentaire
@@ -85,7 +85,7 @@ echo'<h2> Variable : déclaration, affectation et type</h2>';
 
 //En PHP, on déclare une variable avec le signe $.
 
-$a = 127; // on déclare la variable !a et lui affect la valeur 127, sans oublier le point vérgul"".
+$a = 127; // on déclare la variable $a et lui affect la valeur 127, sans oublier le point vérgul ";".
 echo gettype($a); // gettype() est une fonction prédéfinie qui retourne le type d'une variable. Ici un integer (entier)
 echo '<br>';
 
@@ -119,9 +119,9 @@ echo '<hr>';
 echo'<h2> Concaténation lors de l\'affectation</h2>';
 //------------------------------------------------------------
 
-$prenom1 = 'Bruno ';
+$prenom1 = 'Bruno '; //mettre un espace avant la fermeture de la quote
 $prenom1 = 'Claire';
-echo $prenom1 .  '<br>';// Dans ce cas il affiche Claire car la dexième affectation écraseta la première
+echo $prenom1 .  '<br>';// Dans ce cas il affiche Claire car la dexième affectation écrasera la première
 
 $prenom1 = 'Bruno et';
 $prenom1 .= ' Claire';// l'opérateur .= permet d'ajouter la valeur "Claire" à la valeur "Bruno et" contenue dans $prenom1 sans l'écraser. affiche donc "Bruno et Claire"
@@ -136,7 +136,7 @@ $message = 'aujourd\'hui'; // on échape les apostrophes dans les quotes simples
 
 // --------------
 $txt = 'Bonjour';
-echo "$txt tout le monde <br>";// dans des guillemet la variable est évaluée: c'est son contenu qui est affiché
+echo "$txt tout le monde <br>";// dans des guillemets la variable est évaluée: c'est son contenu qui est affiché
 echo '$txt tout le monde <br>';// dans des quotes simple, le nom de la variable est traité commme du texte brut
 echo '<hr>';
 //-------------------------------------------------------------
@@ -163,7 +163,7 @@ echo $a / $b . '<br>';// affiche 5
 echo $a % $b . '<br>';// affiche 0
 
 //------
-//Opération et affectation combinées :
+//Opération et afféctation combinées :
 
 $a = 10;
 $b = 2;
@@ -299,7 +299,7 @@ if (empty($var2)){
     echo '$var2 est défini <br>';
 }
 
-// Si on met les lignes 247 et 248  en commentaires, la première condition reste vraie, car $var1 est non définie, et la seconde devient fausse, car $var2 n'existe pas.
+// Si on met les lignes 291 et 292  en commentaires, la première condition reste vraie, car $var1 est non définie, et la seconde devient fausse, car $var2 n'existe pas.
 
 // Contexte d'utilisateur : les formulaires pour empty, l'existence de variable ou d'array avec isset avant de les utiliser.
 
@@ -310,7 +310,7 @@ $var3 = 'Je ne suis pas vide';
 
 if (!empty($var3)) echo '$var3 n\est pas vide <br>'; //! pour NOT est une négation.Ici signifie si $var3 n'est pas vide
 
-//phpinfo();  // fonction prédéfinie qui affiche des informatios sur le contexte d'exécution du script
+//phpinfo();  // fonction prédéfinie qui affiche des informations sur le contexte d'exécution du script
 echo '<h3 class ="violet"> phpinfo() :<h3>';           
 echo '<p class="color"> fonction prédéfinie qui affiche des informatios sur le contexte d\'exécution du script</p>';
 
@@ -443,7 +443,7 @@ echo '<h3 class ="violet"> die () ou exit():<h3>';
 //Le manuel PHP
 echo '<h3 class ="violet"> Le manuel PHP:<h3>';
 /*
-Pour chercher un fonction (ou une chose) de PHP : faire Google "OHP nom de la fonction.
+Pour chercher un fonction (ou une chose) de PHP : faire Google "PHP nom de la fonction.
 exemple : "PHP trim"
 le site de référence : php.net/manual/fr/
 A retenir : l'encadré blanc qui définit la fonction : en bleu les mots clés et les paramètres, en vert leur type, entre crochets les paramètres optionnels.
@@ -452,7 +452,7 @@ A retenir : l'encadré blanc qui définit la fonction : en bleu les mots clés e
 //-------------------------------------------
 echo'<h2>Les Fonctions Utilisateur </h2>';
 //-------------------------------------------
-//Des fonctions sont des morceaux de codes encapsulés dans des accolades et portant un nom, qu'o, appelle au besoin pour exécuter une action précise.
+//Des fonctions sont des morceaux de codes encapsulés dans des accolades et portant un nom, qu'on appelle au besoin pour exécuter une action précise.
 
 // Les fonctions qui ne sont pas prédéfinies mais déclarées par le développeur sont appelées fonction utilisateur.
 
@@ -804,7 +804,7 @@ $tab[] = 'Suisse';// les crochets vides permettent d'ajouter une valeur à la fi
 debug($tab);
 
 // Afficher la valeur "Italie" de l'array $tab
-echo $tab[2];// pour accéder à une afficher  d'un array, on met son indice entre [] après le nom de cet array
+echo $tab[1];// pour accéder à une afficher  d'un array, on met son indice entre [] après le nom de cet array
 
 //------
 
@@ -836,8 +836,8 @@ echo 'Taille du Tableau : ' . sizeof($couleur) . '<br>'; // affiche 3 (élément
 
 echo '<br>';
 echo '<br>';
-// Un alias de clount():
-echo '<p class="color">Un alias de clount() :<p>';
+// Un alias de count():
+echo '<p class="color">Un alias de count() :<p>';
 // function sizeof($param){
 //     return count($param);
 // };
@@ -865,8 +865,8 @@ foreach($tab as $indice => $valeur){// Quant il y a deux variables après "as", 
 
 // Exercice  :
 /* Ecrivez 
-- écrivez un array avec les indices prenom, nom, email et telephone et mettez y pour valeur des information fictives. Remarque cet array ne concerne qu'une seule personne.
-- Puis avec une boucle foreach, affichez les valeurs de votre array dans dans des <p>, sauf le prenom qui doit être affiché dans <p>
+- écrivez un array avec les indices prenom, nom, email et telephone et mettez y pour valeur des informations fictives. Remarque cet array ne concerne qu'une seule personne.
+- Puis avec une boucle foreach, affichez les valeurs de votre array dans des <p>, sauf le prenom qui doit être affiché dans <p>
 */
 
 $eleve = array(
