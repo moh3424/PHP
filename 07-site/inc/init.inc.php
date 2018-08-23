@@ -11,7 +11,7 @@ Ce fichier sera inclus dans TOUS les scripts (hors inc eux mêmes) pour les él�
 */
 
 // -Connexion à la base de données BDD:
-$pdo = new PDO ('mysql:host=localhost;dbname=entreprise', // driver mysql : serveur; nom de la PDD
+$pdo = new PDO ('mysql:host=localhost;dbname=site_commerce', // driver mysql : serveur; nom de la PDD
                 'root',// pseudo de la BDD
                 '', // Mot de passe de la BDD
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,// option1 : pour affichez les erreurs SQL
