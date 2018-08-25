@@ -3,7 +3,7 @@
 //La superglobal $_POST
 //-------------
 //$_POST est une superglobale qui permet de récupérer les données saisies dans un formulaire.
-//$_POST étant une supetglobale, il s'agit d'un ARRAY, et il est disponible dans tous les contextes du script, y compris au sein des fonctions (sans faire global $_POST).
+//$_POST étant une superglobale, il s'agit d'un ARRAY, et il est disponible dans tous les contextes du script, y compris au sein des fonctions (sans faire global $_POST).
 
 // L'array $_POST se remplit de la manière suivante : les names du formulaire constituent les indices de $_POST, et les données saisies dans le formulaires constituent les valeurs de $_POST.
 var_dump($_POST);
