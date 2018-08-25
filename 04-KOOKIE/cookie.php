@@ -15,9 +15,9 @@ Un cookie étant sauvgardé sur le poste de l'internaute, il peut potentiellemen
 //Affectation de la variable $langue :
 //------------------------------------
 if (isset($_GET['langue'])){// si une langue est passée dans l'url c'est que nous avons cliqué sur un lien
-    $langue = $_GET['langue'];
+    $langue = $_GET['langue'];// récuperation de la langue choisie par l'internaute a l'aide de la superglobale $_GET et on la stocke dans la variable $langue
 
-}elseif (isset($_COOKIE['langue'])){// si on a rçu sur le serveur un cookie appelé langue de la part de l'internaute
+}elseif (isset($_COOKIE['langue'])){// si on a reçu sur le serveur un cookie appelé langue de la part de l'internaute c'est l'interernaute à déjà choisie cette dérnièert lors de sa visite précédente
     $langue = $_COOKIE['langue'];// je récupère la langue stockée dans le cookie
 }else {
     $langue = 'fr';// par défaut on choisit le français si l'internaute n'a pas choisi de langue (=condition if) ou qu'il n'a pas de cookie (= condition elseif)
