@@ -29,10 +29,10 @@ if (!empty($_POST)){// si $_POST n'est pas vide, c'est qu'il est rempli par des 
 <form method="post" action="">
     <div>
         <label for="prenom">Prénom</label><!-- un formulaire est toujours dans des <form> pour fonctionner . method = comment vont circuler les données du navigateur au serveur (ici en post : ) . action = url de destination des données -->
-
         <input type="text" name="prenom" id ="prenom" value =""><!-- ne pas oublier les names: ils constituent les indices de l'array $_POST qui réceptionne les données -->
     </div>
     <div>
+        <label for="password">Password</label>
         <input type="password" id ="password" name ="password" value="">
     </div>
     <div>
