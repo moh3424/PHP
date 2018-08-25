@@ -5,7 +5,7 @@
 //----------------------------
 
 /*
-Un fichier temporaire appelé SESSION est créé sur le serveur avec un identifiant unique. Cette session est liée à un seul internaute car le même temps, un cookie est déposé sur le poste de l'internaute avec l'identfiant. Ce cookie se détruit lorsqu'on quite le navigateur.
+Un fichier temporaire appelé SESSION est créé sur le serveur avec un identifiant unique. Cette session est liée à un seul internaute car au même temps, un cookie est déposé sur le poste de l'internaute avec l'identfiant. Ce cookie se détruit lorsqu'on quite le navigateur.
 
 le fichier SESSION peut contenir toute sortes d'information, y compris sensibles, car il n'est pas accessible par l'internaute, donc pas modifiable. On y stocke par exemple des données de login, ou les infos d'un panier d'achat.
 
@@ -30,7 +30,7 @@ var_dump($_SESSION);
 
 // vider une partie de la SESSION :
 
-unset($_SESSION['mdp']);// unset() permet de vider une partie de la SESSION, icisupprime l'indice "mdp"
+unset($_SESSION['mdp']);// unset() permet de vider une partie de la SESSION, ici supprime l'indice "mdp"
 
 echo '<br> 2- La session après suppression du mdp : <br>';
 
