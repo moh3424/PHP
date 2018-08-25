@@ -21,13 +21,13 @@ var_dump ($_GET);
 $message = '';// variable pour contenir les messages pour l'internaute
 if  (isset($_GET['action']) && $_GET['action'] == 'modifier' ){// Il fau vérifier d'abord l'existance de l'indice "action" dans $_GET avant d'en vérifier la valeur
     
-    $message = '<p>Vous avez demander la suppression de votre profil</p>';
+    $message = '<p>Vous avez demander la modificationde votre profil</p>';
    
 } 
 
 if (isset($_GET['action']) && $_GET['action'] == 'supprimer' ){
     
-    $message = '<p>Vous avez demander la modification de votre profil</p>';
+    $message = '<p>Vous avez demander la suppression de votre profil</p>';
    
 } 
 
