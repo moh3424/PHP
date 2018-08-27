@@ -96,7 +96,7 @@ $employe = $result->fetch(PDO::FETCH_OBJ);// transforme en un objet avec les nom
 debug($employe);
 echo $employe->prenom . '<br>';
 
-//Attention : après une requête, il faut choisir l'un des fetch OU après un requête, il faut choisir l'un des fetch(). Si l'on veut en refaire un, il faut refaire la requête : en effet, on ne peut pas effectuer plusieurs transformation successives sur le même objet $result.
+//Attention : après une requête, il faut choisir l'un des fetch(). Si l'on veut en refaire un, il faut refaire la requête : en effet, on ne peut pas effectuer plusieurs transformation successives sur le même objet $result.
 
 //-------------
 // Exercece :afficher le service de l'employé dont l'id_employe est 417 (production).
@@ -129,7 +129,7 @@ echo $employe['service'] . '<br>';
 //----------------------------------------------------------
 // 04- fetch() avec boucle while (plusieurs résultats)
 //----------------------------------------------------------
-
+   
 echo '<h3> 04- fetch() avec boucle while (plusieurs résultats) </h3>';
 
 $resultat = $pdo-> query ('SELECT * FROM employes'); // cette requête retourne plusieurs résultats, on fait donc une boucle pour les parcourir
