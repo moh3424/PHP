@@ -11,12 +11,20 @@ require_once '../inc/init.inc.php';
 // 4- Traitement du $_POST : enregistrement du produit en BDD
 
 // debug($_POST);
-debug($_FILES);
+
 if (!empty($_POST)){
     // ICI il faudrait mettre les contrôles sur les champs du formulaire.
 
     // Ici le code de la photo à venir
     $photo_bdd = ''; // Par défaut la photo est vide en BDD
+    debug($_FILES);
+    if (!empty($_FILES['photo']['name'])){// 'il y a un nom de fichier dans la superglobale $_FILES, c'est que je suis en train d'uploader un fichier
+        $nom_photo = $_POST['reference'] . '_' . $_FILES['photo']['name']; // Pour créer un nom de fichier unique, on concatène la référence du produit avec le nom du fichier en cours d'upload
+
+        $photo_bdd = 'photo/'. $nom_photo; // chemin relatif de la photo enregistré dans la BDD correspondant au fichier physique uploadé dans le dossier /photo/ du site 
+        copy($_FILES['photo']['tmp_name'], '../ .$photo_bdd'); // on enregistre le fichier photo qui est temporairement dans $_FILES['photo]['tmp_name] dans le répértoire "../photo/nom_photo.jpg"
+
+    }
 
   
 
