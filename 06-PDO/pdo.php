@@ -70,7 +70,7 @@ debug($result);
 //$result est le resultat de la requête sur une forme inexploitable directement : il faut donc le transformer avec la méthode fetch() :
 $employe = $result->fetch(PDO::FETCH_ASSOC);// la méthode fetch() avec son paramètre PDO::FETCH_ASSOC permet de transformer l'objet $result en ARRAY ASSOCIATIF axploitable (ici $emloye) indexé avec le nom des champs de la table
 
-debug($employe);// por voir l'array associatif
+debug($employe);// pour voir l'array associatif
 
 echo 'Je suis ' . ' ' . $employe['prenom'] . ' ' .$employe['nom'] . ' du service ' . ' ' . $employe['service'] . '<br>';
 
@@ -85,7 +85,7 @@ print $employe[1] .'<br>';
 
 $result = $pdo->query("SELECT * FROM employes WHERE prenom = 'daniel'");
 
-$employe = $result->fetch();// sans paramètres fetch( mélangearray associatif et array numérique)
+$employe = $result->fetch();// sans paramètres fetch( mélange array associatif et array numérique)
 
 debug($employe);
 echo $employe['prenom'] . '<br>'; //ou encor
@@ -99,7 +99,7 @@ echo $employe->prenom . '<br>';
 //Attention : après une requête, il faut choisir l'un des fetch OU après un requête, il faut choisir l'un des fetch(). Si l'on veut en refaire un, il faut refaire la requête : en effet, on ne peut pas effectuer plusieurs transformation successives sur le même objet $result.
 
 //-------------
-// Exercece :afficher le service de l'employé dont l'id_employe est 417 (productio).
+// Exercece :afficher le service de l'employé dont l'id_employe est 417 (production).
 
 // Rappel :
 
