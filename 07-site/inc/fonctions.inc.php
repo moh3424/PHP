@@ -15,14 +15,14 @@ function debug($param){
 //Fonction qui indique si l'internaute est connecté :
 
 function internauteEstConnecte(){
-    if(isset($_SESSION['mombre'])){// si la session "mombre"existe, c'est que l'internaute est passé par la page de connexion et que nous avons créé cet indice dans $_SESSION
+    if(isset($_SESSION['membre'])){// si la session "membre"existe, c'est que l'internaute est passé par la page de connexion et que nous avons créé cet indice dans $_SESSION
         return true;
     }else{
         return false;
     }
 // OU on peut ecrire cette condition autrement:
 
-    return (isset($_SESSION['mombre']));
+    return (isset($_SESSION['membre']));
 }
 
 // Fonction qui indique si le membre est admin connecté :
