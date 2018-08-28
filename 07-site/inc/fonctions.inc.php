@@ -56,7 +56,7 @@ function executeRequete($req, $param = array()){ // cette fonction attend deux v
     global $pdo; // permet d'avoir accès à la variable $pdo définie dans l'espace global (c'est à dire hors de cette fonction)au sein de cette fonction
 
     $result = $pdo->prepare($req); // on prépare la requête envoyée à notre fonction
-    $result->execute($param); // on exécute la requête en lui donnant l'array présent dans $param qui associe tous les marqueurs à leur valeur
+    $result ->execute($param); // on exécute la requête en lui donnant l'array présent dans $param qui associe tous les marqueurs à leur valeur
 
     return $result; // on retourne le résultat de la requête de SELECT
 
