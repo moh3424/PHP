@@ -54,6 +54,19 @@ $suggestion ='';
     }/* fin if (isset($_GET['id_produit'])) */
 
 
+// Exercice : affichere 2 produits (photo et titre) aléatoirement appartenent à la catégorie du produit affiché dans la fiche_produit.php. la photo est cliquable et amène à la fiche du produit. Utilisez la variable $suggestion pour afficher le contenu. Complèment : pour sélectionner aléatoirement des produits, vous utilisez la fonction ORDER BY RAND() dans la requête SQL
+
+$resultat = executeRequete("SELECT id_produit, photo, titre FROM produit WHERE categorie = :categorie ORDER BY RAND() LIMIT 2", array(':categorie'=> $categorie));// $categorie contient la categorie du produit actuellement afiché dans la fiche_produit.php. En SQL, la fonction LIMIT permet de limiter le nombre de résultats de la requête au nombre spécifié. ORDER BY RAND() fait un tri aléatoire des résultats. Attention à l'ordre de ces fonctions: TOUJOURS WHERE puis ORDER BY puis LIMIT.
+
+while ($autre_produits = $resultat->fetch(PDO::FETCH_ASSOC)){// on tronsforme l'objet $resultat en un array associatif. On fait une boucle while car il y a 2 produits dans $resultat.
+    debug($autre_produits);
+    $suggestion .= '<div class="col-sm-3">';
+    $suggestion .= '<a href="fiche_produit.php?id_produit='.$autre_produits['id_produit'].'"><img class="img-fluid"src ="'. $autre_produits['photo'].'" alt="'. $autre_produits['titre'].'"></a>';
+    $suggestion .= '</div>';
+ 
+
+
+}
 
 
 
@@ -89,22 +102,18 @@ require_once 'inc/haut.inc.php'; // doctype, header, nav
 </div><!-- row -->
 
 
+<!--Exercice-->
 
+<hr>
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Suggestion de produits:</h3>
+    </div>
+    <?php echo $suggestion; ?>
+
+</div>
 
 
 <?php
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 require_once 'inc/bas.inc.php'; // footer et fermetures des balise
