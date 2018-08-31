@@ -38,10 +38,6 @@
 $inscription = true;// pour s'avoir si l'internaute vient de s'inscrire (on mettra la variable à true) et ne plus afficher le formulaire d'inscription
 $nouvContact ='';
 $contenu='';
-$contenu1='';
-$contenu2='';
-$contenu3='';
-$contenu4='';
 
 // -Connexion à la base de données BDD:
 $pdo = new PDO ('mysql:host=localhost;dbname=contacts', // driver mysql : serveur; nom de la PDD
@@ -53,75 +49,96 @@ $pdo = new PDO ('mysql:host=localhost;dbname=contacts', // driver mysql : serveu
 
 
 
-//----------------------fonction de requête-----------------------------------
-
-function executeRequete($req, $param = array()){ // cette fonction attend deux valeurs :une requête SQL (obligatoire) et un array qui associe les marqueurs aux valeurs (non obligatoire car on a affecté au paramètre $param un array())vide par défaut
-
-    // Echappment des données reçues avec htmlspecialchars :
-
-    if (!empty($param)){//  si l'array $param n'est pas vide, je peux faire la boucle :
-
-        foreach($param as $indice => $valeur){
-            $param[$indice] = htmlspecialchars($valeur, ENT_QUOTES);// on échappe les valeurs de $param que l'on remet à leur place dans $param[$indice]
-        }
-
-    }/* fin if (!empty($param)) */
-
-    global $pdo; // permet d'avoir accès à la variable $pdo définie dans l'espace global (c'est à dire hors de cette fonction)au sein de cette fonction
-
-    $result = $pdo->prepare($req); // on prépare la requête envoyée à notre fonction
-    $result ->execute($param); // on exécute la requête en lui donnant l'array présent dans $param qui associe tous les marqueurs à leur valeur
-
-    return $result; // on retourne le résultat de la requête de SELECT
-
-}/* fin function executeRequete($req, $param = array()) */
 
 
-// Controle des champs :
+
+
+var_dump($_POST);
+
+
+//Traitement du formulaire :
 
 if (!empty($_POST)){
 
-    if (!isset($_POST['prenom']) || strlen($_POST['prenom']) < 2 || strlen($_POST['prenom']) > 20  ) $contenu1 .= '<h3 class="rouge">Le Prénom doit contenir entre 2 et 20 caractères.</h3>';
+    if (!isset($_POST['prenom']) || strlen($_POST['prenom']) < 2 || strlen($_POST['prenom']) > 20  ) $contenu .= '<p class="rouge">Le Prénom doit contenir entre 2 et 20 caractères.</p>';
 
-    if (!isset($_POST['nom']) || strlen($_POST['nom']) < 2 || strlen($_POST['nom']) > 20  ) $contenu2 .= '<h3 class="rouge">Le nom  doit contenir entre 2 et 20 caractères.</h3>';
+    if (!isset($_POST['nom']) || strlen($_POST['nom']) < 2 || strlen($_POST['nom']) > 20  ) $contenu .= '<p class="rouge">Le nom  doit contenir entre 2 et 20 caractères.</p>';
 
-    if (!isset($_POST['telephone']) || strlen($_POST['telephone']) != 10   ) $contenu3 .= '<h3 class="rouge">Le telephone doit contenir 10 caractères.</h3>';
+    if (!isset($_POST['telephone']) || !ctype_digit($_POST['prenom']) ||strlen($_POST['telephone']) != 10   ) $contenu .= '<p class="rouge">Le telephone doit contenir 10 caractères.</p>';// ctype_digit()
 
     
-    if (!isset($_POST['type_contact']) || ($_POST['type_contact'] != 'ami' && $_POST['type_contact'] != 'famille' && $_POST['type_contact'] != 'professionnel' && $_POST['type_contact'] != 'autre' ) ) $contenu .= '<h3 class="rouge">Le type de contact n\'est pas mentionner</h3>';
+    if (!isset($_POST['type_contact']) || ($_POST['type_contact'] != 'ami' && $_POST['type_contact'] != 'famille' && $_POST['type_contact'] != 'professionnel' && $_POST['type_contact'] != 'autre' ) ) $contenu.= '<p class="rouge">Le type de contact n\'est pas mentionner</p>';// 
 
-    if (!isset($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)  ) $contenu4 .= '<h3 class="rouge">Email est incorrect.</h3>';
+    if (!isset($_POST['annee_rencontre']) || !ctype_digit($_POST['annee_rencontre']) || $_POST['annee_rencontre']<(date('Y')-100) || $_POST['annee_rencontre'] > date('Y')) $contenu .= '<p class="rouge">La date est incorect.</p>';// a retenir (a utilisé)
+
+    // OU :
+    // On réutilise la fonction utilisateur validateDate() :
+    function validateDate ($date, $format = 'd-m-Y'){// $format = 'd-m-Y' permet de donner une valeur par défaut au paramètre $format si on ne lui pas d'argument lors de l'appel de la fonction
+        $d = DateTime::createFromFormat($format, $date); // Crée un objet date si la date est valide et qu'elle corrspond au format indiqué dans $format. Dans le cas contraire, retourne false (c'est- à - dir si la date n'est pas valide ou qu'elle ne correspond pas au format indiqué)
+
+        if ($d && $d->format($format)== $date){ // si $d n'est pas false (voir ci-dessus) et que l'objet dat $d est bien égale à la date $date, c'est qu'il n'y a pas eu d'extrapolation sur la date : exemple de 32/01/2015 qui devient 01/02/2015. Dans ce cas la date est validé . On retourne true.
+
+            return true;
+        }
+        else {
+
+            return false;
+        }
+        
+     }// /* fin function validateDate ($date, $format = 'd-m-Y')*/
+
+     if(!isset($_POST['annee_rencontre']) || !validateDate($_POST['annee_rencontre'], 'Y')) $contenu .= '<p class="rouge">La date est incorect.</p>';// fonction aussi pour valider l'url
+
+
+    if (!isset($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)  ) $contenu .= '<p class="rouge">L\'mail est incorrect.</p>';
 
      //-------------------------------
     // Si pas d'erreur sur le formulaire, on vérifie que le nom et le prenom sont disponible dans la BDD:
 
         if (empty($contenu)) { //si $contenu est vide, c'est qu'il n'y a pas d'erreur
+        // On échappe toutes les valeurs de $_POST :
+            echo '<h5>  On échappe toutes les valeurs de $_POST :</h5>' ;
+            foreach($_POST as $indice => $valeur){
+            $_POST[$indice] = htmlspecialchars($valeur, ENT_QUOTES);
+        }
 
-            // Vérification du nom et prenom :
-                $nouvContact = executeRequete("SELECT * FROM contact WHERE nom = :nom AND prenom = :prenom", array(':nom' => $_POST['nom'], ':prenom' => $_POST['prenom'])); // 
+
+ // On fait une requête préparée :
+
+    $result = $pdo->prepare("INSERT INTO contact (prenom, nom, telephone, annee_rencontre, type_contact, email) VALUES (:prenom, :nom, :telephone, :annee_rencontre, :type_contact, :email)");
+
+    $result->bindParam(':prenom', $_POST['prenom']);
+    $result->bindParam(':nom', $_POST['nom']);
+
+    $result->bindParam(':telephone', $_POST['telephone']);
+    $result->bindParam(':annee_rencontre', $_POST['annee_rencontre']);
+
     
-            if ($nouvContact->rowCount() >0){//si la requête retourn 1 ou plusieurs resultats c'est que le nom et le prénom existe en BDD
-                $contenu.= '<h3 class ="red">Le contact existe déjà.</h3>';
-            } else {
-                // sinon le pseudo étant disponible, on enregitr le membre en BDD :
-                executeRequete("INSERT INTO contact ( nom, prenom, email, type_contact, telephone, annee_rencontre) VALUES(:nom, :prenom, :email, :type_contact,                                             :telephone,:annee_rencontre  )",
-                                                                      array(':nom'          => $_POST['nom'],
-                                                                            ':prenom'       => $_POST['prenom'],
-                                                                            ':email'        => $_POST['email'],
-                                                                            ':type_contact' => $_POST['type_contact'],
-                                                                            ':telephone'    => $_POST['telephone'],
-                                                                            ':annee_rencontre' => $_POST['annee_rencontre']  
-                                                                                ));
-              $contenu .= '<h3 class="vert">Le contact est enregistré.</h3>';    
-             $inscription = false; // pour ne plus afficher le formulaire sur cette page                                                              
-            }// fin du else
-    }/* fin if (empty($contenu)) */
+    $result->bindParam(':type_contact', $_POST['type_contact']);
+    $result->bindParam(':email', $_POST['email']);
+
+    //  Version avec une boucle foreach :
+        //  echo '<h5> Version avec une boucle foreach :</h5>' ;
+        //  foreach($_POST as $indice=> &$valeur){ // pour que ça marche on a besoin d'une variable par référence
+        //      $result->bindParam($indice, $valeur);
+        //  }
+
+    $req =$result->execute();// la methode execute() renvoie un booléen selon que la requête a marché (true) ou  pas (false)
+
+    // Afficher un message de réussite ou d'écheque :
+
+    if ($req){
+        $contenu .= '<div class="vert">Le contacte a bien été ajouté .</div>';
+        }else {
+        $contenu .= '<div class="rouge">Une erreur est survenue lors de l\'enregistrement. .</div>';
+    }// fin de if ($req)
+        }/* fin if (empty($contenu)) */
 }/* fin if (!empty($_POST)) */
 
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -150,43 +167,45 @@ if (!empty($_POST)){
     </style>
 </head>
 <body>
-
+<?php echo  $contenu; ?>
 <form method ="post" action="">
     <div>
         <label for="prenom">Prénom</label>
         <input type="text" id="prenom" name="prenom" value="">
     </div>
-    <?php echo  $contenu1; ?>
+   
 
     <div>
         <label for="nom">Nom</label>
         <input type="text" id="nom" name="nom" value="">
     </div>
-    <?php echo  $contenu2; ?>
+
 
     <div>
         <label for="telephone">Téléphone</label>
         <input type="text" id="telephone" name="telephone" value="">
     </div>
-    <?php echo  $contenu3; ?>
+   
     
         <label for="annee_rencontre">Année de rencontre</label>
         <select name="annee_rencontre" id="annee_rencontre">
         <?php
-            for($j = 1918; $j<=2018; $j++){
+                echo '<option value=""></option>';
+            for($j = date('Y')-100; $j<=date('Y'); $j++){// date('Y') donne l'année en cours soit 2018
                
                 echo '<option>' .  $j . '</option>';
+                //Ou bien echo "<option>$j</option>";
             }
         ?> 
         </select>
        
-   
+  
 
     <div>
         <label for="email">Email</label>
         <input type="text" name ="email" id ="email">   
     </div>
-    <?php echo  $contenu4; ?>
+   
   
         <label for="type_contact">Type de contact</label>
         <select name="type_contact" id="type_contact">
@@ -195,8 +214,8 @@ if (!empty($_POST)){
             <option value="famille">Famille</option>
             <option value="professionnel">Professionnel</option>
             <option value="autre">Autre</option>
-        
         </select>
+   
     
     <div><input type="submit" value="valider"></div>
 
