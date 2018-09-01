@@ -44,6 +44,29 @@
 //---------------------
 echo'<div><h2> les bases</h2></div>';
 //--------------------
+$comptage = 0;
+$donnees = array();
+$donnees[] = 'John';
+$donnees[] = 'Peter';
+$donnees[] = 'Jack';
+$donnees[1] = 'Matthew';
+$comptage += count($donnees);
+echo $comptage;
+ 	
+function calculSoldes($prix, $reduc = 20)
+{
+$prix_solde = $prix * ( (100-$reduc) / 100 );
+return $prix_solde;
+}
+
+echo calculSoldes(100) .'<br>';// true 380 
+echo calculSoldes(100,25).'<br>';// 75
+//echo calculSolde(100,50);
+$rayon['legumes'] = array('courgette','aubergine','concombre');
+$rayon['fruits'] = array('banane','orange','cerise');
+echo $rayon['fruits'][2];
+
+
 ?>
 
 <?php
@@ -291,11 +314,11 @@ echo '<p class="color">empty(): teste si c\'est vide (c\'est-à-dire 0, \'\', NU
 $var1 = 0;
 $var2 = '';
 
-if (empty($var1)){
+if (isset($var1)){
     echo 'on a 0, vide, NULL , false ou non défini <br>';
 }
 
-if (empty($var2)){
+if (isset($var2)){
     echo '$var2 est défini <br>';
 }
 

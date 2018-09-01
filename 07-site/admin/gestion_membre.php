@@ -27,6 +27,7 @@ require_once '../inc/init.inc.php';
     $contenu .='<tr>';
     $contenu .= '<td>id_membre</td>'  ;
     $contenu .= '<td>pseudo</td>' ;
+   
     $contenu .= '<td>nom</td>' ;
     $contenu .= '<td>prenom</td>' ;
     $contenu .= '<td>email</td>' ;
@@ -40,11 +41,13 @@ require_once '../inc/init.inc.php';
 
     while ($inscrit = $membre->fetch(PDO::FETCH_ASSOC)){
         $contenu .= '<tr>';
-        foreach($inscrit as $resultat =>$info){
+        foreach ($inscrit as $indice => $info) {
+            // Affichage de chaque ligne à chaque tour de boucle sauf "mdp"
+           if ($indice != 'mdp'){
 
-           
-            $contenu .= '<td>'. $info .'</td>';
-          
+               $contenu .= '<td>' . $info . '</td>';
+           }
+            
         }
         $contenu .='</tr>';
     }

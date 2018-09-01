@@ -28,18 +28,28 @@ $pdo = new PDO ('mysql:host=localhost;dbname=dialogue', // driver mysql : serveu
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,// option1 : pour affichez les erreurs SQL
                 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8') // option 2 : définit le jeu de caractères des échanges avec la BDD
                 );
+    echo '<pre>';            
+    var_dump($pdo);
+    echo '<pre>'; 
+    echo '<pre>';            
+    var_dump($pdo);
+    echo '<pre>';
+  
 
 // var_dump($_POST); // ou bien print_r($_POST)
+echo'<h4> Traitement contre les failles JS (XSS : Cross Site Script) ou les failles CSS: On parle d\'échappement des données recues :</h4>';
+
+echo'<h5> On commence par mettre du code CSS dans le champ "message" : '. htmlentities('<style>body{display:none}</style>' ) .  ':</h5>';
 
 if (!empty($_POST)){// signifie si le formulaire est rempli
     //Traitement contre les failles JS (XSS : Cross Site Script) Ou les failles CSS: On parle d\'échappement des données recues:
-    echo'<h4> Traitement contre les failles JS (XSS : Cross Site Script) ou les failles CSS: On parle d\'échappement des données recues :</h4>';
+    
 
     // On commence par mettre du code CSS dans le champ "message" : <style>body{display:none}</style>
-    echo'<h4> On commence par mettre du code CSS dans le champ "message" : '. htmlentities('<style>body{display:none}</style>' ) .  ':</h4>';// htmlentities() permet d'afficher les balises
+    // htmlentities() permet d'afficher les balises
 
     // Pour s'en prémunir :
-    echo'<h4> Pour s\'en prémunir :</h4>';
+    echo'<h4> Pour s\'en prémunir : On utilise la méthode htmlspecialchars(la valeur du champ en POST)</h4>';
     $_POST['pseudo'] = htmlspecialchars($_POST['pseudo'], ENT_QUOTES); // convertit les caractères spéciaux (<, >, &, "", '') en entités HTML (exemple : le > devien &lt; ) ce qui permet de rendre inofensives les balises HTML. On parle d'échappement des données reçus.
     $_POST['message'] = htmlspecialchars($_POST['message'], ENT_QUOTES);
 

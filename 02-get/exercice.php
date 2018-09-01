@@ -10,7 +10,10 @@
 //         3- Si on a cliqué sur le lien "modifier mon profil", c\'est-àdir que vous avez reçu cette info en GET, vous affichez le message "Vous avez demandé la modification de votre profil",
 //         et si c'est la suppression qui est demandée, vous affichez le message "Vous avez demandé la suppression de votre profil"
 //   </p>';
-var_dump ($_GET);
+
+
+
+// var_dump ($_GET);
 // if (isset($_GET['nom']) && isset($_GET['prenom'])){
 //     echo '<p> nom :' . $_GET['nom'] . '</p>';
 //     echo '<p> prenom :' . $_GET['prenom'] . '</p>';
