@@ -10,12 +10,18 @@
 //$_GET transforme les informations passées dans l'url en un array : $_GET = array ('cle1 => 'valeur1', cleN => 'valeurN').
 var_dump($_GET);
 
-if (isset($_GET['article']) && isset($_GET['couleur']) && isset($_GET['prix'])){
-    echo '<p> Articl :' . $_GET['article'] . '</p>';
-    echo '<p> Prix :' . $_GET['prix'] . '</p>';
-    echo '<p> Couleur :' . $_GET['couleur'] . '</p>';
+// if (isset($_GET['article']) && isset($_GET['couleur']) && isset($_GET['prix'])){
+//     echo '<p> Articl :' . $_GET['article'] . '</p>';
+//     echo '<p> Prix :' . $_GET['prix'] . '</p>';
+//     echo '<p> Couleur :' . $_GET['couleur'] . '</p>';
+// } else {
+//     echo '<p> Aucun produit sélectionné....</p>';
+// }
+
+if (isset($_GET['message']) && isset($_GET['nom'])){
+    echo '<p> Message :' . $_GET['message'] . '</p>';
+    echo '<p> Nom :' . $_GET['nom'] . '</p>';
+    // echo '<p> Prenom :' . $_GET['prenom'] . '</p>';
 } else {
-    echo '<p> Aucun produit sélectionné....</p>';
+    echo '<p> Aucune sélectionné....</p>';
 }
-
-

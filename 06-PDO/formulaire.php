@@ -8,9 +8,16 @@ $message =''; // pour afficher les messages à l'internautes
 
 // 1- Création du formulaire :
     echo '<h3> 1- Création du formulaire :</h3>' ;
-
-    var_dump($_POST);
+    echo '<pre>';
+    var_dump($_POST);// affiche un tableau vide avant remplissage du formulair c'est un test pour le developpeur 
+    echo '<pre>';
+    echo '<pre>';
     var_dump(DateTime::createFromFormat('d-m-Y','32-01-2015'));// pour tester la validation de la date en affichant sur le navigateur pour le developpeur
+    echo '<pre>';
+    $date = DateTime::createFromFormat('j-M-Y', '15-Feb-2009');
+    echo $date->format('Y-M-d');
+    
+    
 
     //1- Connexion a la BDD :
     echo '<h4> 1- Connexion a la BDD :</h4>' ;
@@ -103,10 +110,7 @@ $message =''; // pour afficher les messages à l'internautes
 
             }// fin de if(empty($message)) 
 
-
-
-
-            }// fin du if(!empty($_POST))
+        }// fin du if(!empty($_POST))
        
         echo $message;
     ?>
@@ -128,16 +132,13 @@ $message =''; // pour afficher les messages à l'internautes
      <label for="service">Service</label><br>
     <input type="text" id="service" name="service" value=""><br><br>
 
-    <label for="date_embauche">date d'embauche</label><br>
+    <label for="date_embauche">Date d'embauche</label><br>
     <input type="text" id="date_embauche" name="date_embauche"  placeholder="AAAA-MM-JJ" value=""><br><br>
 
      <label for="salaire">Salaire</label><br>
     <input type="text" id="salaire" name="salaire"  value=""><br><br>
 
     <input type="submit" value="enregistrement">
-
-    
-
 
 
 </form>
