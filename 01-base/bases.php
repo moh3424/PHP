@@ -49,6 +49,15 @@ echo'<div><h2> les bases</h2></div>';
 <?php
 //pour ouvrir un passage en PHP, on utilise la balise précédente
 //pour fermer un passage en pHP, on utilise la balise suivante:
+$a =42;
+echo date('d-m-Y');
+if ($a == 0){
+    echo 'pomme';
+}elseif($a > 42){
+    echo 'abrico';
+}else{
+    echo 'orange';
+}
 ?>
 
 <p>Bonjour</p>  <!-- en dehors des balises d'ouverture et la fermeture de PHP, nous pouvons écrir du HTML -->

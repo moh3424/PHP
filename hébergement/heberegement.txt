@@ -1,0 +1,35 @@
+Mise en ligne d'un site avec base de données
+
+Aller sur www.000webhost.com
+
+1- S'inscrire chez l'hébergeur :
+
+	-email
+	-mdp
+	-nom du site
+
+2-Cliquer sur l'email de confirmation reçu
+
+3- Création de la BDD chez l'hébergeur
+	-cliquer sur "Gérer les bases de données" et remplir le formulaire :
+		-Nom de la BDD : dialogue
+		-Utilisateur : Mettez un nom que vous choisissez
+		-Mdp de la BDD :  Mettez un mdp que vous choisissez
+
+
+Une barre de progression permet de suivre l'évolution de la création de la BDD.
+
+4- Export / import des tables dans la BDD :
+	- Dans XAMPP : PHPMyAdmin > se positionner sur la BDD à exporter > puis cliquer sur l'onglet Exporter > cliquer sur Exécuter (cela upload un fichier .sql)
+
+	- chez l'hébergeur : cliquer sur le boutton "gérer les bases de données" > choisir PHPMyAdmin > puis cliquer sur l'onglet Importer > cliquer sur Parcourir et sélectionner le fichier .sql précédent
+
+5- Créer  un fichier index.php :
+	- On renomme  notre fichier dialogue.php (c'est le point d'entrée du site).
+
+6- Uploader chez l'hébergeur le (s) fichier (s) sources :
+	-Chez l'hébergeur : cliquer sur le bouton  "Gestionnaire de fichiers" > puis sur le bouton "télécharger des fichiers maintenent"
+	-un onglet d'upload s'ouvre : faite glissé/déposé de votre ou vos fichiers sources (ici index.php).
+
+7- Tester la bonne mise en ligne du site.
+	

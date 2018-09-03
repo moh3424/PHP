@@ -93,7 +93,7 @@ if (!$inscription) : // (!$inscription) équivaut à ($inscription == false), c'
           <label for="prenom">Prénom</label><br>
         <input type="text" name="prenom" id="prenom" value=""><br><br>
 
-          <label for="email">Email</label><br>
+        <label for="email">Email</label><br>
         <input type="text" name="email" id="email" value=""><br><br>
 
         <label>Civilité</label><br>
