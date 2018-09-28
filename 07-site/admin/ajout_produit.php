@@ -64,6 +64,7 @@ require_once '../inc/haut.inc.php';
     <ul class="nav nav-tabs">
         <li><a class= "nav-link" href="gestion_boutique.php">Affichage de produits</a></li>
         <li><a class="nav-link active" href="ajout_produit.php">Ajout d'un produit</a></li>
+        <li><a class="nav-link" href="modif_produit.php">Modifier un produit</a></li>
     </ul>
 <?php
  echo $contenu;

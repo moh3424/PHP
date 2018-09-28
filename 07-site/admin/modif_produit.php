@@ -68,7 +68,7 @@ $contenu .= '<table class="table table-hover" border="1">';
         // affichage des informations de chaque ligne $ligne :
             foreach($ligne as $indice => $valeur){
                 if($indice == 'photo') {
-                    $contenu .= '<td><input type="file" name="' . $valeur . '" id="'. $indice . '"> <img src="' . $valeur . '" width="90" alt"' . $ligne['titre'] . '"></td>';
+                    $contenu .= '<td><input type="file" name="' . $valeur . '" id="'. $indice . '"> <img src="../photo/' . $valeur . '" width="90" alt"' . $ligne['titre'] . '"></td>';
                     } else {
                
                      $contenu .= '<td><input   type ="text" id ="' . $indice . '" name="' .$indice. '" value="' . $valeur . '"></td>';
