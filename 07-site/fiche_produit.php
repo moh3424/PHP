@@ -63,8 +63,6 @@ while ($autre_produits = $resultat->fetch(PDO::FETCH_ASSOC)){// on tronsforme l'
     $suggestion .= '<div class="col-sm-3">';
     $suggestion .= '<a href="fiche_produit.php?id_produit='.$autre_produits['id_produit'].'"><img class="img-fluid"src ="'. $autre_produits['photo'].'" alt="'. $autre_produits['titre'].'"></a>';
     $suggestion .= '</div>';
- 
-
 
 }
 

@@ -25,7 +25,7 @@ require_once '../inc/init.inc.php';
     // debug($membre);
     $contenu .='<table border = "1">';
     $contenu .='<tr>';
-    $contenu .= '<td>id_membre</td>'  ;
+    $contenu .= '<td>id_users</td>'  ;
     $contenu .= '<td>pseudo</td>' ;
    
     $contenu .= '<td>nom</td>' ;

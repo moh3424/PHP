@@ -42,9 +42,9 @@ $contenu .= '<table border="1">';
         // affichage des informations de chaque ligne $ligne :
             foreach($ligne as $indice => $valeur){
                 if($indice == 'photo') {
-                    $contenu .= '<td> <img src="../' . $valeur . '" width="90" alt"' . $ligne['titre'] . '"></td>';
+                    $contenu .= '<td> <img src="../photo/' . $valeur . '" width="90" alt"' . $ligne['titre'] . '"></td>';
                     } else {
-            $contenu .= '<td>' . $valeur . '</td>';
+            $contenu .= '<td><input name="' . $valeur . '" value="' . $valeur . '"></td>';
             }
         }
             $contenu .= '<td><a href="?id_produit='. $ligne['id_produit'] .'"  onclick="return(confirm(\'Etes-vous certain de vouloir supprimer ce produit ? \' ))" >Supprimer</a></td>';  // $ligne['id_produit'] contien l'id de chaque produit à chaque tour de boucle while : ainsi le lien est dynamique, l'id passé en GET change selon le produit sur lequel je clique
@@ -75,6 +75,7 @@ require_once '../inc/haut.inc.php';
     
         <li><a class= "nav-link active" href="gestion_boutique.php">Affichage de produits</a></li>
         <li><a class="nav-link" href="ajout_produit.php">Ajout d'un produit</a></li>
+        <li><a class="nav-link" href="modif_produit.php">Modifier un produit</a></li>
     </ul>
 <?php
  echo $contenu;
