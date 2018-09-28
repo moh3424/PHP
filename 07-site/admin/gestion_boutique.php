@@ -20,21 +20,23 @@ if (isset($_GET['id_produit'])) {
 // 2 - Affichage des produits dans le back-office :
 // Exercice : afficher tous les produits sous forme de table HTML que vous stockez dans la variable $contenu. Tous les champs doivent être affichés. Pour la photo afficher une image (de 90px de côté)
 $resultat = $pdo->query("SELECT * FROM produit");
-$contenu .= '<table border="1">';
-    $contenu .= '<tr>';
-        $contenu .= '<th>id produit</th>';
-        $contenu .= '<th>référence</th>';
-        $contenu .= '<th>catégorie</th>';
-        $contenu .= '<th>titre</th>';
-        $contenu .= '<th>description</th>';
-        $contenu .= '<th>couleur</th>';
-        $contenu .= '<th>taille</th>';
-        $contenu .= '<th>public</th>';
-        $contenu .= '<th>photo</th>';
-        $contenu .= '<th>prix</th>';
-        $contenu .= '<th>stock</th>';
-        $contenu .= '<th>action</th>';
-    $contenu .= '</tr>';
+$contenu .= '<table class= "table table-hover"  border="1">';
+    $contenu .= '<thead class="thead-dark">';
+        $contenu .= '<tr>';
+            $contenu .= '<th>id produit</th>';
+            $contenu .= '<th>référence</th>';
+            $contenu .= '<th>catégorie</th>';
+            $contenu .= '<th>titre</th>';
+            $contenu .= '<th>description</th>';
+            $contenu .= '<th>couleur</th>';
+            $contenu .= '<th>taille</th>';
+            $contenu .= '<th>public</th>';
+            $contenu .= '<th>photo</th>';
+            $contenu .= '<th>prix</th>';
+            $contenu .= '<th>stock</th>';
+            $contenu .= '<th>action</th>';
+        $contenu .= '</tr>';
+    $contenu .= '</thead>';
      // Affichage des autres lignes : 
      while($ligne = $resultat->fetch(PDO::FETCH_ASSOC)) {
         // debug($ligne);
@@ -44,7 +46,7 @@ $contenu .= '<table border="1">';
                 if($indice == 'photo') {
                     $contenu .= '<td> <img src="../photo/' . $valeur . '" width="90" alt"' . $ligne['titre'] . '"></td>';
                     } else {
-            $contenu .= '<td><input name="' . $valeur . '" value="' . $valeur . '"></td>';
+            $contenu .= '<td><input   name="' . $valeur . '" value="' . $valeur . '"></td>';
             }
         }
             $contenu .= '<td><a href="?id_produit='. $ligne['id_produit'] .'"  onclick="return(confirm(\'Etes-vous certain de vouloir supprimer ce produit ? \' ))" >Supprimer</a></td>';  // $ligne['id_produit'] contien l'id de chaque produit à chaque tour de boucle while : ainsi le lien est dynamique, l'id passé en GET change selon le produit sur lequel je clique

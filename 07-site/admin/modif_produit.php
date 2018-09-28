@@ -19,7 +19,7 @@ if (!empty($_POST)) {
 
     }
     $resultat = executeRequete("UPDATE produit SET reference = :reference, categorie= :categorie, titre= :titre, description = :description, couleur= :couleur, 
-    taille = :taille, public= :public, photo = :photo, prix = :prix, stock = :stock   WHERE id_produit = :id_produit", array(':id_produit' => $_POST['id_produit'],
+    taille = :taille, public= :public, photo = :photo_bdd, prix = :prix, stock = :stock   WHERE id_produit = :id_produit", array(':id_produit' => $_POST['id_produit'],
                                                                                       ':reference' => $_POST['reference'],
                                                                                       ':categorie' => $_POST['categorie'],
                                                                                       ':titre' => $_POST['titre'],
@@ -27,7 +27,7 @@ if (!empty($_POST)) {
                                                                                       ':couleur' => $_POST['couleur'],
                                                                                       ':taille' => $_POST['taille'],
                                                                                       ':public' => $_POST['public'],
-                                                                                      ':photo'   => $photo_bdd, 
+                                                                                      ':photo_bdd'   => $photo_bdd, 
                                                                                       ':prix' => $_POST['prix'],
                                                                                       ':stock' => $_POST['stock']
                                                                                         ));
@@ -42,7 +42,7 @@ if (!empty($_POST)) {
 // Exercice : afficher tous les produits sous forme de table HTML que vous stockez dans la variable $contenu. Tous les champs doivent être affichés. Pour la photo afficher une image (de 90px de côté)
 $resultat = $pdo->query("SELECT * FROM produit");
 
-$contenu .= '<table class="table" border="1">';
+$contenu .= '<table class="table table-hover" border="1">';
     $contenu .= '<thead class="thead-dark">';
         $contenu .= '<tr>';
             $contenu .= '<th>id produit</th>';
@@ -68,9 +68,11 @@ $contenu .= '<table class="table" border="1">';
         // affichage des informations de chaque ligne $ligne :
             foreach($ligne as $indice => $valeur){
                 if($indice == 'photo') {
-                    $contenu .= '<td><input type="file" name="' . $valeur . '" id="' . $valeur . '"> <img src="../photo/' . $valeur . '" width="90" alt"' . $ligne['titre'] . '"></td>';
+                    $contenu .= '<td><input type="file" name="' . $valeur . '" id="'. $indice . '"> <img src="' . $valeur . '" width="90" alt"' . $ligne['titre'] . '"></td>';
                     } else {
-            $contenu .= '<td><input type ="text" id ="' . $indice . '" name="' .$indice. '" value="' . $valeur . '"></td>';
+               
+                     $contenu .= '<td><input   type ="text" id ="' . $indice . '" name="' .$indice. '" value="' . $valeur . '"></td>';
+              
             }
 
         }
